@@ -47,7 +47,7 @@ public class AuthController {
 	// 회원가입버튼 -> /auth/signup -> /auth/signin
 	// 회원가입버튼 X
 	@PostMapping("/auth/signup")
-	public @ResponseBody String signup(@Valid SignupDto signupDto, BindingResult bindingResult) { 
+	public  String signup(@Valid SignupDto signupDto, BindingResult bindingResult) { 
 		// key=value (x-www-form-urlencoded)
 		// @ResponseBody 데이터를 리턴함.
 		
@@ -57,7 +57,7 @@ public class AuthController {
 			for(FieldError error:bindingResult.getFieldErrors()) {
 				errorMap.put(error.getField(), error.getDefaultMessage());
 			}
-			return "오류남";
+			throw new RuntimeException("유효성 검사 실패함");
 		}else {		
 			log.info(signupDto.toString());
 			// User <- SignupDto 
