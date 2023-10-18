@@ -6,13 +6,25 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.cos.photogramstart.domain.user.User;
+import com.cos.photogramstart.service.AuthService;
 import com.cos.photogramstart.web.dto.auth.SignupDto;
 
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor // B) final 필드를 DI(의존성 주입) 할때 사용
 @Controller // 1. Ioc 등록 2. 파일을 리턴하는 컨트롤러
 public class AuthController {
-
 	
 	private static final Logger log = LoggerFactory.getLogger(AuthController.class);
+	
+	private final  AuthService authService; // A)
+	
+	// ID : 의존성 주입, 번거로워서 A),B)방식을 주로 사용함.
+//	private AuthService authService;
+//	public AuthController(AuthService authService) { 
+//		this.authService = authService;
+//	}
 
 	@GetMapping("/auth/signin")
 	public String signinForm() {
@@ -27,8 +39,13 @@ public class AuthController {
 	// 회원가입버튼 -> /auth/signup -> /auth/signin
 	// 회원가입버튼 X
 	@PostMapping("/auth/signup")
-	public String signup(SignupDto signupDto) { // 회원가입, key=value (x-www-form-urlencoded)
+	public String signup(SignupDto signupDto) { // key=value (x-www-form-urlencoded)
 		log.info(signupDto.toString());
+		// User <- SignupDto 
+		User user = signupDto.toEntity();
+		//log.info(user.toString());
+		User userEnUser = authService.joinMember(user); // 회원가입
+		System.out.println(userEnUser);
 		return "auth/signin"; // 로그인
 	}
 }
