@@ -21,7 +21,7 @@ spring:
   jpa:
     open-in-view: true
     hibernate:
-      ddl-auto: update #create
+      ddl-auto: update #create : 데이타 관련 제약조건 변경되면 씀. 현재 DB 초기화
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     show-sql: true
