@@ -23,6 +23,7 @@ public class SecurityConfig {
 				.and()
 				.formLogin()
 				.loginPage("/auth/signin") // GET
+				.loginProcessingUrl("/auth/signin") // POST -> Spring Security가 로그인 프로세스 진행
 				.defaultSuccessUrl("/");
 		return http.build();
 	}
