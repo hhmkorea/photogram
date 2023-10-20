@@ -9,11 +9,8 @@ import com.cos.photogramstart.web.dto.user.UserUpdateDto;
 
 import lombok.RequiredArgsConstructor;
 
-//@RequiredArgsConstructor
 @RestController // data 응답
 public class UserApiController {
-	
-	//private final UserService userService; 
 	
 	@PutMapping("/api/user/{id}")
 	public String update(UserUpdateDto userUpdateDto) {
