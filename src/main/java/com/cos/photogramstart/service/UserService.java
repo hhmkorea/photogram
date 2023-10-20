@@ -1,5 +1,6 @@
 package com.cos.photogramstart.service;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 public class UserService {
 
 	private final UserRepository userRepository;
+	private final BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	@Transactional
 	public User ModifyMember(int id, User user) { // 회원수정
@@ -21,7 +23,11 @@ public class UserService {
 		
 		// 2. 영속화된 오브젝트를 수정 - 더티 체킹(업데이트 완료)
 		userEntity.setName(user.getName());
-		userEntity.setPassword(user.getPassword());
+		
+		String rawPassword = user.getPassword();
+		String encPassword = bCryptPasswordEncoder.encode(rawPassword);
+				
+		userEntity.setPassword(encPassword);
 		userEntity.setBio(user.getBio());
 		userEntity.setWebsite(user.getWebsite());
 		userEntity.setPhone(user.getPhone());
