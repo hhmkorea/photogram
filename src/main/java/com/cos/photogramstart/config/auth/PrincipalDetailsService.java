@@ -1,4 +1,4 @@
-package com.cos.photogramstart.web.dto.auth;
+package com.cos.photogramstart.config.auth;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
