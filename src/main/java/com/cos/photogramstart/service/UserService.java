@@ -30,7 +30,7 @@ public class UserService {
 		
 		String rawPassword = user.getPassword();
 		String encPassword = bCryptPasswordEncoder.encode(rawPassword);
-				
+				 
 		userEntity.setPassword(encPassword);
 		userEntity.setBio(user.getBio());
 		userEntity.setWebsite(user.getWebsite());
