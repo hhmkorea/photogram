@@ -28,6 +28,7 @@ public class ControllerExceptionHandler {
 
 	@ExceptionHandler(CustomValidationApiException.class)
 	public ResponseEntity<?> validationApiException(CustomValidationApiException e) { // Object Data 리턴, ?표로 지정하면 응답할때 자동으로 Generic이 지정됨.
+		System.out.println("=================================== 나 실행됨??????????????");
 		return new ResponseEntity<>(new CMRespDto<>(-1, e.getMessage(), e.getErrorMap()), HttpStatus.BAD_REQUEST);
 	}
 }
