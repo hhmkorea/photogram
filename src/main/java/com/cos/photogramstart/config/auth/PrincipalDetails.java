@@ -26,6 +26,7 @@ public class PrincipalDetails implements UserDetails{
 	public Collection<? extends GrantedAuthority> getAuthorities() {		
 		Collection<GrantedAuthority> collector = new ArrayList<>(); // ArrayList 부모가 Collectoion		
 		collector.add(() -> { return user.getRole();}); // Lamda 식		
+		//collector.add(() -> "ROLE_" + user.getRole().toString());
 		return collector;
 	}
 

@@ -17,15 +17,18 @@ public class PrincipalDetailsService implements UserDetailsService{
 	private final UserRepository userRepository;	
 	// 1. 패스워드는 Spring Security에서 알아서 체킹함으로 신경쓸 필요 없다.
 	// 2. 리턴이 잘되면 자동으로 UserDetails타입을 세션을 만든다.
+	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		
+		System.out.println("로그인 진행중 .......");
 
 		User userEntity = userRepository.findByUsername(username);
 		
 		if(userEntity == null) {
 			return null;
 		}else {
-			return new PrincipalDetails(userEntity);
+			return new PrincipalDetails(userEntity);  // SecurityContextHolder => Authentication 객체 내부에 담김.
 		}
 		
 	}
