@@ -18,15 +18,15 @@
                 <!--사진업로드 로고 end-->
                 
                 <!--사진업로드 Form-->
-                <form class="upload-form" >
-                    <input  type="file" name="file"  onchange="imageChoose(this)"/>
+                <form class="upload-form"  action="/image" method="post" enctype="multipart/form-data"> <!-- 여러가지 타입의 파일을 전송할때 쓰임 -->
+                    <input  type="file" name="file"  onchange="imageChoose(this)"/> <!-- 파일은 byte화 되어서 넘어감 -->
                     <div class="upload-img">
                         <img src="/images/person.jpeg" alt="" id="imageUploadPreview" />
                     </div>
                     
                     <!--사진설명 + 업로드버튼-->
                     <div class="upload-form-detail">
-                   		 <input type="text" placeholder="사진설명" name="caption">
+                   		 <input type="text" placeholder="사진설명" name="caption" /> <!-- key=value -->
                         <button class="cta blue">업로드</button>
                     </div>
                     <!--사진설명end-->
