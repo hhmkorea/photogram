@@ -49,7 +49,7 @@ public class UserApiController {
 			}
 			throw new CustomValidationApiException("유효성검사 실패함", errorMap);
 		}else {			
-			User userEntity = userService.ModifyMember(id, userUpdateDto.toEntity());
+			User userEntity = userService.modifyMember(id, userUpdateDto.toEntity());
 			principalDetails.setUser(userEntity); // 세션 정보 변경
 			return new CMRespDto<>(1, "회원수정완료", userEntity);
 		}
