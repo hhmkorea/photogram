@@ -23,7 +23,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Data // Getter, Setter, toString() 자동 생성됨
 @Entity // 디비에 테이블을 생성
 public class User {	
 	@Id
