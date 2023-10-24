@@ -24,9 +24,13 @@ public class ControllerExceptionHandler {
 		// 1. 클라이언트에게 응답할 때는 Script가 좋음.
 		// 2. Ajax 통신 - CMRespDto
 		// 3. Android 통신 - CMRespDto
-		return Script.back(e.getErrorMap().toString());
+		if(e.getErrorMap() == null) {
+			return Script.back(e.getMessage());
+		}else {
+			return Script.back(e.getErrorMap().toString());
+		}
 	}
-
+	
 	@ExceptionHandler(CustomValidationApiException.class)
 	public ResponseEntity<?> validationApiException(CustomValidationApiException e) { // Object Data 리턴, ?표로 지정하면 응답할때 자동으로 Generic이 지정됨.
 		return new ResponseEntity<>(new CMRespDto<>(-1, e.getMessage(), e.getErrorMap()), HttpStatus.BAD_REQUEST);
