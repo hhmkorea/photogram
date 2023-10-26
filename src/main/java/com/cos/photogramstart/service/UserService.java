@@ -20,6 +20,7 @@ public class UserService {
 	private final UserRepository userRepository;
 	private final BCryptPasswordEncoder bCryptPasswordEncoder;
 	
+	@Transactional(readOnly = true)
 	public User memberProfile(int userId) { // 회원 프로필
 		// SELECT * FROM image WHERE userId = :userId;
 		// JPA 방식

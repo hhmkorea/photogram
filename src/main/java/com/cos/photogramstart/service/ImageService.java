@@ -5,6 +5,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.UUID;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +27,7 @@ public class ImageService {
 	private String uploadFolder; 
 	
 	// 사진업로드
+	@Transactional //
 	public void uploadPhoto(ImageUploadDto imageUploadDto, PrincipalDetails principalDetails) { 
 		UUID uuid = UUID.randomUUID(); // uuid
 		String imageFileName = uuid+"_"+imageUploadDto.getFile().getOriginalFilename(); // 1.jpg 
