@@ -27,31 +27,24 @@ import lombok.RequiredArgsConstructor;
 public class UserApiController {
 	private final UserService userService;
 		
-		@PutMapping("/api/user/{id}")
-/*	public String update(UserUpdateDto userUpdateDto) {
-		System.out.println(userUpdateDto);
-		return "ok";
-	}*/
+	@PutMapping("/api/user/{id}")
 	public CMRespDto<?> update(
-			@PathVariable int id, 
-			@Valid UserUpdateDto userUpdateDto, 
-			BindingResult bindingResult, // 꼭 @Valid가 적혀있는 다음 파라매터에 적어야 실행됨.
-			@AuthenticationPrincipal PrincipalDetails principalDetails) {
-			if(bindingResult.hasErrors()) {
+												@PathVariable int id, 
+												@Valid UserUpdateDto userUpdateDto, 
+												BindingResult bindingResult, // 꼭 @Valid가 적혀있는 다음 파라매터에 적어야 실행됨.
+												@AuthenticationPrincipal PrincipalDetails principalDetails) {
+												if(bindingResult.hasErrors()) {
 				
 			Map<String, String> errorMap = new HashMap<>();
 			
 			for(FieldError error:bindingResult.getFieldErrors()) {
 				errorMap.put(error.getField(), error.getDefaultMessage());
-				System.out.println("======================");
-				System.out.println(error.getDefaultMessage());
-				System.out.println("======================");
 			}
 			throw new CustomValidationApiException("유효성검사 실패함", errorMap);
 		}else {			
 			User userEntity = userService.modifyMember(id, userUpdateDto.toEntity());
 			principalDetails.setUser(userEntity); // 세션 정보 변경
-			return new CMRespDto<>(1, "회원수정완료", userEntity);
+			return new CMRespDto<>(1, "회원수정완료", userEntity); // 응답시에 userEntity의 모든 getter함수가 호출되고 JSON으로 파싱하여 응답한다.
 		}
 	}
 }
