@@ -30,12 +30,12 @@ public class UserController {
 	@GetMapping("/user/{id}/update")
 	public String update(@PathVariable int id, @AuthenticationPrincipal PrincipalDetails principalDetails) {
 		// 1. 추천
-		System.out.println("세션 정보:"+principalDetails.getUser());
+		//System.out.println("세션 정보:"+principalDetails.getUser()); // User 호출할때 내부적으로 Image 호출하고.. 무한참조 에러 남.
 		
 		// 2.극혐
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		PrincipalDetails mPrincipalDetails = (PrincipalDetails) auth.getPrincipal();
-		System.out.println("직접 찾은 세션 정보:"+mPrincipalDetails.getUser());
+		//System.out.println("직접 찾은 세션 정보:"+mPrincipalDetails.getUser()); // User 호출할때 내부적으로 Image 호출하고.. 무한참조 에러 남.
 				
 		return "user/update";
 	}
