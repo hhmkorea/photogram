@@ -1,5 +1,6 @@
 package com.cos.photogramstart.service;
 
+import java.security.Principal;
 import java.util.function.Supplier;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -10,6 +11,7 @@ import com.cos.photogramstart.domain.user.User;
 import com.cos.photogramstart.domain.user.UserRepository;
 import com.cos.photogramstart.handler.ex.CustomException;
 import com.cos.photogramstart.handler.ex.CustomValidationApiException;
+import com.cos.photogramstart.web.dto.user.UserProfileDto;
 
 import lombok.RequiredArgsConstructor;
 
@@ -21,20 +23,26 @@ public class UserService {
 	private final BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	@Transactional(readOnly = true)
-	public User memberProfile(int userId) { // 회원 프로필
+	public UserProfileDto memberProfile(int pageUserId, int pricipalId) { // 회원 프로필
+		UserProfileDto dto = new UserProfileDto(); // 데이타 트랜스 오브젝트
+		
 		// SELECT * FROM image WHERE userId = :userId;
 		// JPA 방식
-		User userEntity = userRepository.findById(userId).orElseThrow(() -> { // Image는 안가져옴. from User만 진행.
+		User userEntity = userRepository.findById(pageUserId).orElseThrow(() -> { // Image는 안가져옴. from User만 진행.
 			throw new CustomException("해당 프로필 페이지는 없는 페이지 입니다.");
 		});
-		System.out.println("=======================================");
-		if(userEntity.getImages().isEmpty()) {
-			userEntity = null;
-		}else {
-			userEntity.getImages().get(0);
-		}
 		
-		return userEntity;
+		dto.setUser(userEntity);
+		dto.setImageCount(userEntity.getImages().size());
+		dto.setPageOwnerState(pageUserId == pricipalId); // 1은 페이지 주인, -1은 주인이 아님
+		
+//		if(userEntity.getImages().isEmpty()) {
+//			userEntity = null;
+//		}else {
+//			userEntity.getImages().get(0);
+//		}
+		
+		return dto;
 	}
 	
 	@Transactional
