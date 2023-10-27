@@ -27,8 +27,8 @@ public class SubscribeApiController {
 		// return null 로 테스트, result 값을 던질수 있으나 깔끔하게 Handler에서 try catch 문으로 처리
 	}
 
-	@DeleteMapping("/api/unSubscribe/{toUserId}")
-	public ResponseEntity<?> unsubscribe(@AuthenticationPrincipal PrincipalDetails principalDetails, @PathVariable int toUserId) {
+	@DeleteMapping("/api/subscribe/{toUserId}")
+	public ResponseEntity<?> unSubscribe(@AuthenticationPrincipal PrincipalDetails principalDetails, @PathVariable int toUserId) {
 		subscribeService.unSubscribe(principalDetails.getUser().getId(), toUserId);
 		return new ResponseEntity<>(new CMRespDto<>(1, "구독취소하기 성공", null), HttpStatus.OK);
 	}
