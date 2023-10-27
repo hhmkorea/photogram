@@ -26,7 +26,7 @@
 		<!--유저정보 및 사진등록 구독하기-->
 		<div class="profile-right">
 			<div class="name-group">
-				<h2>${user.name}</h2>
+				<h2>${dto.user.name}</h2>
 				
 				<!-- jstl 활용하여 버튼 조건에 따라 보여주기 -->
 				<c:choose>
