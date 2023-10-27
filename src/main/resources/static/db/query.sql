@@ -14,7 +14,7 @@ TRUNCATE image;
 SELECT COUNT(*) FROM subscribe WHERE fromUserId = 1;
 
 -- 구독여부(ssal로 로그인, cos 페이지로 감) 
-SELECT * FROM subscribe WHERE fromUserId = 1 AND toUserId = 2;
+SELECT COUNT(*) FROM subscribe WHERE fromUserId = 1 AND toUserId = 2;
 
 
 
