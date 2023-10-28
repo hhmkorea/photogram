@@ -26,7 +26,7 @@
 			<version>2.4.4</version>
 		</dependency>
 
-		<!-- qlrm -->
+		<!-- qlrm : db 결과를 java 클래스에 맵핑해줌 -->
 		<dependency>
 			<groupId>org.qlrm</groupId>
 			<artifactId>qlrm</artifactId>

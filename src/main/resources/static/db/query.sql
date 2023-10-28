@@ -57,11 +57,11 @@ SELECT true FROM subscribe WHERE fromUserId = 1 AND toUserId = 3;
 
 -- 동일 유저인지 판단 쿼리---로그인(1)
 SELECT u.id, u.username, u.profileImageUrl, 
-	(SELECT true FROM subscribe WHERE fromUserId = 1 AND toUserId = u.id) subscribeState ,
-	(1 = u.id) equalUserState 
+	if ((SELECT 1 FROM subscribe WHERE fromUserId = 1 AND toUserId = u.id), 1, 0) subscribeState ,
+	if ((1 = u.id), 1, 0) equalUserState 
 FROM user u INNER JOIN subscribe s 
 ON u.id = s.toUserId
-WHERE s.fromUserId = 2
+WHERE s.fromUserId = 2 -- fromUserId : 현재 페이지 주인id, cos 
 ;
 
 
