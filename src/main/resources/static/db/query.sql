@@ -2,13 +2,25 @@ CREATE USER 'cos'@'%' IDENTIFIED BY 'cos1234';
 GRANT ALL PRIVILEGES ON *.* TO 'cos'@'%';
 CREATE DATABASE photogram;
 
-SELECT * FROM user; 
--- DESC USER;
--- TRUNCATE user;
-SELECT * FROM image;
--- TRUNCATE image;
 
+-- 주요 테이블 
+SELECT * FROM user; 
+SELECT * FROM image;
 SELECT * FROM subscribe;
+-- DESC image;
+-- TRUNCATE user;
+
+-- 2번 로그인 : userId = 1,3 
+SELECT * 
+FROM image 
+WHERE userId 
+IN (SELECT toUserId FROM subscribe WHERE fromUserId = 2); 
+
+SELECT toUserId FROM subscribe WHERE fromUserId = 2;
+
+
+
+
 -- 구독수 
 SELECT COUNT(*) FROM subscribe WHERE fromUserId = 1;
 -- 구독여부(ssal로 로그인, cos 페이지로 감) 
@@ -63,7 +75,5 @@ FROM user u INNER JOIN subscribe s
 ON u.id = s.toUserId
 WHERE s.fromUserId = 2 -- fromUserId : 현재 페이지 주인id, cos 
 ;
-
-
 
 
