@@ -7,6 +7,7 @@ CREATE DATABASE photogram;
 SELECT * FROM user; 
 SELECT * FROM image;
 SELECT * FROM subscribe;
+SELECT * FROM likes;
 -- DESC image;
 -- TRUNCATE user;
 
