@@ -11,7 +11,10 @@ SELECT * FROM subscribe;
 -- TRUNCATE user;
 
 -- 2번 로그인 : userId = 1,3 
-SELECT * FROM image WHERE userId IN (SELECT toUserId FROM subscribe WHERE fromUserId = 2); 
+SELECT * FROM image 
+WHERE userId IN (SELECT toUserId FROM subscribe WHERE fromUserId = 2)
+ORDER BY id DESC
+LIMIT 3; 
 
 SELECT toUserId FROM subscribe WHERE fromUserId = 2;
 
