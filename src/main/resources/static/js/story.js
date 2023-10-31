@@ -48,7 +48,7 @@ function getStoryItem(image) {
 
 			<button>`;
 			
-			if(image.likeStatue) {
+			if(image.likeState) {
 				item += `<i class="fas fa-heart active" id="storyLikeIcon-${image.id}" onclick="toggleLike(${image.id})"></i>`;
 			} else {
 				item += `<i class="far fa-heart" id="storyLikeIcon-${image.id}" onclick="toggleLike(${image.id})"></i>`;
@@ -121,7 +121,7 @@ function toggleLike(imageId) {
 			
 			let likeCountstr = $(`#storyLikeCount-${imageId}`).text();
 			let likeCount = Number(likeCountstr) + 1;
-			$(`storyLikeCount-${imageId}`).text(likeCount);
+			$(`#storyLikeCount-${imageId}`).text(likeCount);
 			
 			likeIcon.addClass("fas");
 			likeIcon.addClass("active");
@@ -140,7 +140,7 @@ function toggleLike(imageId) {
 			
 			let likeCountstr = $(`#storyLikeCount-${imageId}`).text();
 			let likeCount = Number(likeCountstr) - 1;
-			$(`storyLikeCount-${imageId}`).text(likeCount);
+			$(`#storyLikeCount-${imageId}`).text(likeCount);
 			
 			likeIcon.removeClass("fas");
 			likeIcon.removeClass("active");
