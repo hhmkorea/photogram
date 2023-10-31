@@ -30,6 +30,7 @@ storyLoad();
 
 function getStoryItem(image) {
 	let item = `<div class="story-list__item">
+	${image.id}
 	<div class="sl__item__header">
 		<div>
 			<img class="profile-image" src="/upload/${image.user.profileImageUrl}"
@@ -45,8 +46,16 @@ function getStoryItem(image) {
 	<div class="sl__item__contents">
 		<div class="sl__item__contents__icon">
 
-			<button>
-				<i class="fas fa-heart active" id="storyLikeIcon-${image.id}" onclick="toggleLike(${image.id})"></i>
+			<button>`;
+			
+			if(image.likeStatue) {
+				item += `<i class="fas fa-heart active" id="storyLikeIcon-${image.id}" onclick="toggleLike(${image.id})"></i>`;
+			} else {
+				item += `<i class="fas fa-heart" id="storyLikeIcon-${image.id}" onclick="toggleLike(${image.id})"></i>`;
+			}			
+		
+		item+=`
+		
 			</button>
 		</div>
 
