@@ -11,6 +11,11 @@ SELECT * FROM likes;
 -- DESC image;
 -- TRUNCATE user;
 
+
+
+
+
+-- 구독정보 리스트 
 -- 2번 로그인 : userId = 1,3 
 SELECT * FROM image 
 WHERE userId IN (SELECT toUserId FROM subscribe WHERE fromUserId = 2)
