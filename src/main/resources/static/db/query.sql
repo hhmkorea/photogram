@@ -9,7 +9,7 @@ SELECT * FROM image;
 SELECT * FROM subscribe;
 SELECT * FROM likes;
 -- DESC image;
---TRUNCATE likes;
+-- TRUNCATE likes;
 
 -- User (참고) Likes
 -- Image (참고) Likes
@@ -21,6 +21,26 @@ DROP TABLE subscribe;
 DROP TABLE image;
 DROP TABLE user;
 */
+
+
+
+
+-- 인기 페이지 
+SELECT * FROM image i INNER JOIN likes l ON i.id = l.imageId;
+
+SELECT i.* 
+FROM image i INNER JOIN (SELECT imageId, 
+									COUNT(imageId) likeCount 
+									FROM likes 
+									GROUP BY imageId
+									)c 
+ON i.id = c.imageId 
+ORDER BY c.likeCount DESC;
+
+-- 한줄로..
+SELECT i.*  FROM image i INNER JOIN (SELECT imageId, COUNT(imageId) likeCount FROM likes  GROUP BY imageId )c ON i.id = c.imageId ORDER BY c.likeCount DESC;
+
+
 
 -- 구독정보 리스트 
 -- 2번 로그인 : userId = 1,3 

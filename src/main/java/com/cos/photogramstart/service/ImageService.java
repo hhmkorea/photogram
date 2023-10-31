@@ -25,6 +25,14 @@ public class ImageService {
 	
 	private final ImageRepository imageRepository;
 	
+	
+	@Transactional(readOnly = true)
+	public List<Image> showPopularPhoto() {
+		
+		return imageRepository.mPopular();
+	}
+	
+	
 	@Transactional(readOnly = true) // 영속성 컨텍스트 변경 감지를 해서, 더티체킹, flush(반영) 
 	public Page<Image> imageStory(int principalId, Pageable pageable) { // 이미지 스토리
 		Page<Image> images = imageRepository.mStory(principalId, pageable);
