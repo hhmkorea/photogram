@@ -21,7 +21,7 @@ spring:
   jpa:
     open-in-view: false
     hibernate:
-      ddl-auto: update #create : 데이타 관련 제약조건 변경되면 씀. 현재 DB 초기화, none : 스키마 변경 안함.
+      ddl-auto: update #create : 데이타 관련 제약조건 변경되면 씀. 현재 DB 초기화, none : 스키마 변경 안함. 
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     show-sql: true
