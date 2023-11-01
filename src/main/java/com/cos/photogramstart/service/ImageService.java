@@ -32,9 +32,9 @@ public class ImageService {
 		return imageRepository.mPopular();
 	}
 	
-	
+	// 이미지 스토리 ------------------------
 	@Transactional(readOnly = true) // 영속성 컨텍스트 변경 감지를 해서, 더티체킹, flush(반영) 
-	public Page<Image> imageStory(int principalId, Pageable pageable) { // 이미지 스토리
+	public Page<Image> imageStory(int principalId, Pageable pageable) { 
 		Page<Image> images = imageRepository.mStory(principalId, pageable);
 		
 		// 2(cos) 로그인 
@@ -59,8 +59,8 @@ public class ImageService {
 	@Value("${file.path}") // application.yml 
 	private String uploadFolder; 
 	
-	// 사진업로드
-	@Transactional //
+	// 사진업로드 -----------------------
+	@Transactional 
 	public void uploadPhoto(ImageUploadDto imageUploadDto, PrincipalDetails principalDetails) { 
 		UUID uuid = UUID.randomUUID(); // uuid
 		String imageFileName = uuid+"_"+imageUploadDto.getFile().getOriginalFilename(); // 1.jpg 
