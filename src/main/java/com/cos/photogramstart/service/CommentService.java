@@ -7,6 +7,8 @@ import com.cos.photogramstart.domain.comment.Comment;
 import com.cos.photogramstart.domain.comment.CommentRepository;
 import com.cos.photogramstart.domain.image.Image;
 import com.cos.photogramstart.domain.user.User;
+import com.cos.photogramstart.domain.user.UserRepository;
+import com.cos.photogramstart.handler.ex.CustomApiException;
 
 import lombok.RequiredArgsConstructor;
 
@@ -15,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 public class CommentService {
 
 	private final CommentRepository commentRepository;
+	private final UserRepository userRepository;
 	
 	// 댓글쓰기
 	@Transactional
@@ -24,13 +27,15 @@ public class CommentService {
 		// 대신 return 할 때 image객체와 user 객체는 id값만 가지고 있는 빈 객체를 리턴받는다.
 		Image image = new Image();
 		image.setId(imageId);
-		User user = new User();
-		user.setId(userId);
+		
+		User userEntity = userRepository.findById(userId).orElseThrow(()->{
+			return new CustomApiException("유저 아이디를 찾을 수 없습니다.");
+		});
 		
 		Comment comment = new Comment();
 		comment.setContent(content);
 		comment.setImage(image);
-		comment.setUser(user);
+		comment.setUser(userEntity);
 		
 		return commentRepository.save(comment);
 	}

@@ -179,20 +179,21 @@ function addComment(imageId) {
 		dataType: "json"
 	}).done(res=>{
 		console.log("성공",  res);		
+				
+		let content = `
+				  <div class="sl__item__contents__comment" id="storyCommentItem-2""> 
+				    <p>
+				      <b>GilDong :</b>
+				      댓글 샘플입니다.
+				    </p>
+				    <button><i class="fas fa-times"></i></button>
+				  </div>
+		`;
+		commentList.prepend(content); // prepend : 미리 앞에다 넣기.
 	}).fail(error=>{
 		console.log("오류", error);
 	});
 	
-	let content = `
-			  <div class="sl__item__contents__comment" id="storyCommentItem-2""> 
-			    <p>
-			      <b>GilDong :</b>
-			      댓글 샘플입니다.
-			    </p>
-			    <button><i class="fas fa-times"></i></button>
-			  </div>
-	`;
-	commentList.prepend(content); // prepend : 미리 앞에다 넣기.
 	commentInput.val("");
 }
 
