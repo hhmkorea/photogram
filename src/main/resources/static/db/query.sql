@@ -8,6 +8,7 @@ SELECT * FROM user;
 SELECT * FROM image;
 SELECT * FROM subscribe;
 SELECT * FROM likes;
+SELECT * FROM comment;
 -- DESC image;
 -- TRUNCATE likes;
 
