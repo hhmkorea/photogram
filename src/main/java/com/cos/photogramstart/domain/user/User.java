@@ -56,7 +56,7 @@ public class User {
 		 EAGER = User를 Select할 때 해당 User id로 등록된 image들을 전부 Join해서 가져와!! ---> from user left outer join image 
 	*/
 	
-	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY) 
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY) // user 하나 선택할때마다 이미지가 여러개 불러오므로 LAZY 전략을 씀.
 	@JsonIgnoreProperties({"user"}) // Images 내부 User는 파싱하지 않음 -- 무한참조 예방.
 	private List<Image> images; // 양방향 매핑
 	
