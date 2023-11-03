@@ -44,7 +44,7 @@ public class Comment {
 
 	@JoinColumn(name = "imageId")
 	@ManyToOne(fetch = FetchType.EAGER)
-	private Image image;
+	private Image image; // FK
 
 	private LocalDateTime createDate;	
 	

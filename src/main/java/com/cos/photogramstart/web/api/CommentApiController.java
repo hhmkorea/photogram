@@ -1,8 +1,11 @@
 package com.cos.photogramstart.web.api;
 
+import javax.validation.Valid;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,7 +27,7 @@ public class CommentApiController {
 	private final CommentService commentService;
 	
 	@PostMapping("/api/comment")
-	public ResponseEntity<?> commentSave(@RequestBody CommentDto commentDto, @AuthenticationPrincipal PrincipalDetails principalDetails) { // @RequestBody : key, value로 된 데이타 받아옴.
+	public ResponseEntity<?> commentSave(@Valid @RequestBody CommentDto commentDto, @AuthenticationPrincipal PrincipalDetails principalDetails) { // @RequestBody : key, value로 된 데이타 받아옴.
 		// 댓글쓰기
 		Comment comment = commentService.saveComment(commentDto.getContent(), commentDto.getImageId(), principalDetails.getUser().getId()); // content, imageId, userId
 		return new ResponseEntity<>(new CMRespDto<>(1, "댓글쓰기성공", comment), HttpStatus.CREATED);		

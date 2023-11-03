@@ -65,19 +65,23 @@ function getStoryItem(image) {
 			<p>${image.caption}</p>
 		</div>
 
-		<div id="storyCommentList-${image.id}">
-
-			<div class="sl__item__contents__comment" id="storyCommentItem-1"">
+		<div id="storyCommentList-${image.id}">`;
+			
+			image.comments.forEach((comment)=>{
+				item += `<div class="sl__item__contents__comment" id="storyCommentItem-${comment.id}">
 				<p>
-					<b>Lovely :</b> 부럽습니다.
+					<b>${comment.user.username} :</b> ${comment.content}
 				</p>
 
 				<button>
 					<i class="fas fa-times"></i>
 				</button>
-
-			</div>
-
+			</div>`;		
+			
+			});
+						
+		item += `
+		
 		</div>
 
 		<div class="sl__item__input">
@@ -178,13 +182,15 @@ function addComment(imageId) {
 		contentType: "application/json; charset=utf-8", 
 		dataType: "json"
 	}).done(res=>{
-		console.log("성공",  res);		
+		//console.log("성공",  res);		
+		
+		let comment = res.data;
 				
 		let content = `
-				  <div class="sl__item__contents__comment" id="storyCommentItem-2""> 
+				  <div class="sl__item__contents__comment" id="storyCommentItem-${comment.id}"> 
 				    <p>
-				      <b>GilDong :</b>
-				      댓글 샘플입니다.
+				      <b>${comment.user.username} :</b>
+				      ${comment.content}
 				    </p>
 				    <button><i class="fas fa-times"></i></button>
 				  </div>
@@ -194,7 +200,7 @@ function addComment(imageId) {
 		console.log("오류", error);
 	});
 	
-	commentInput.val("");
+	commentInput.val(""); // input field를 깨긋하게 비워줌.
 }
 
 // (5) 댓글 삭제
