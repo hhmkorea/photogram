@@ -204,7 +204,8 @@ function addComment(imageId) {
 		`;
 		commentList.prepend(content); // prepend : 미리 앞에다 넣기.
 	}).fail(error=>{
-		console.log("오류", error);
+		console.log("오류", error.responseJSON.data.content);
+		alert(error.responseJSON.data.content);
 	});
 	
 	commentInput.val(""); // input field를 깨긋하게 비워줌.
