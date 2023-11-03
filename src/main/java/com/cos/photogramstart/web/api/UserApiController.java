@@ -58,8 +58,8 @@ public class UserApiController {
 												@Valid UserUpdateDto userUpdateDto, 
 												BindingResult bindingResult, // 꼭 @Valid가 적혀있는 다음 파라매터에 적어야 실행됨.
 												@AuthenticationPrincipal PrincipalDetails principalDetails) {
-												if(bindingResult.hasErrors()) {
-				
+		
+		if(bindingResult.hasErrors()) {		
 			Map<String, String> errorMap = new HashMap<>();
 			
 			for(FieldError error:bindingResult.getFieldErrors()) {
