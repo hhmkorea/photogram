@@ -42,7 +42,11 @@ public class CommentService {
 	
 	// 댓글삭제
 	@Transactional
-	public Comment deleteComment() { 
-		return null;		
+	public void deleteComment(int id) { 
+		try {
+			commentRepository.deleteById(id);					
+		} catch (Exception e) {
+			throw new CustomApiException(e.getMessage()); // data를 리턴하는 컨트롤러 에러 처리
+		}
 	}
 }
