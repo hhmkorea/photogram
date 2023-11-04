@@ -20,7 +20,7 @@ public class ValidationAdvice {
 	@Around("execution(* com.cos.photogramstart.web.api.*Controller.*(..))")
 	public Object apiAdvice(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
 		
-		System.out.println("web api 컨트롤러 ====================");
+		//System.out.println("web api 컨트롤러 ====================");
 		Object[] args = proceedingJoinPoint.getArgs();
 		for (Object arg : args) {
 			if(arg instanceof BindingResult) {
@@ -46,7 +46,7 @@ public class ValidationAdvice {
 	@Around("execution(* com.cos.photogramstart.web.*Controller.*(..))")
 	public Object advice(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
 
-		System.out.println("web 컨트롤러 ====================");
+		//System.out.println("web 컨트롤러 ====================");
 		Object[] args = proceedingJoinPoint.getArgs();
 		for (Object arg : args) {
 			if(arg instanceof BindingResult) {

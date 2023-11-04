@@ -6,8 +6,15 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+import com.cos.photogramstart.config.oauth.OAuth2DetailsService;
+
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 @Configuration
 public class SecurityConfig {
+	
+	private final OAuth2DetailsService oAuth2DetailsService;
 
 	@Bean
 	BCryptPasswordEncoder encode() { // 암호화
@@ -21,10 +28,14 @@ public class SecurityConfig {
 				.antMatchers("/", "/user/**", "/image/**", "/subscribe/**", "/comment/**", "/api/**").authenticated()
 				.anyRequest().permitAll()
 				.and()
-				.formLogin()
+				.formLogin() // form로그인
 				.loginPage("/auth/signin") // GET
 				.loginProcessingUrl("/auth/signin") // POST -> Spring Security가 로그인 프로세스 진행
-				.defaultSuccessUrl("/");
+				.defaultSuccessUrl("/")
+				.and()
+				.oauth2Login() // form로그인도 하는데, ouath2로그인도 할꺼야!!
+				.userInfoEndpoint() // ouath2로그인을 하면 최종응답을 회원정보를 바로 받을 수 있다.
+				.userService(oAuth2DetailsService);
 		return http.build();
 	}
 }
