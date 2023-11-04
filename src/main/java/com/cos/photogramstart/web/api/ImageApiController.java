@@ -31,9 +31,8 @@ public class ImageApiController {
 	private final LikesService likesService;
 
 	@GetMapping("/api/image")
-	public ResponseEntity<?> imageStory(
-								@AuthenticationPrincipal PrincipalDetails principalDetails, 
-								@PageableDefault(size=3) Pageable pageable) { // Native Query에 order by 구문 넣음.
+	public ResponseEntity<?> imageStory(@AuthenticationPrincipal PrincipalDetails principalDetails, @PageableDefault(size=3) Pageable pageable) { 
+							// Native Query에 order by 구문 넣음.
 							// direction=Sort.Direction.DESC 옵션 삭제, (=order by id desc)
 							// 에러 발생됨, Native Query를 쓰지 않으면 활용 가능.
 		Page<Image> images = imageService.imageStory(principalDetails.getUser().getId(), pageable);

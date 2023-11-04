@@ -45,6 +45,7 @@ public class ImageController {
 	@PostMapping("/image")
 	public String imageUpload(ImageUploadDto imageUploadDto, @AuthenticationPrincipal PrincipalDetails principalDetails) {
 		
+		// 놔둬야함!
 		if(imageUploadDto.getFile().isEmpty()) {
 			throw new CustomValidationException("이미지가 첨부되지 않았습니다.", null);
 		}

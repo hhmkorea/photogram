@@ -51,25 +51,14 @@ public class AuthController {
 	public  String signup(@Valid SignupDto signupDto, BindingResult bindingResult) { 
 		// key=value (x-www-form-urlencoded)
 		// @ResponseBody 데이터를 리턴함.
+
+		// 유효성 검사하는 전처리!! --> AOP로 공통으로 뺌 
+		log.info(signupDto.toString());
+		User user = signupDto.toEntity();
+		authService.joinMember(user); // 회원가입
 		
-		if(bindingResult.hasErrors()) {
-			Map<String, String> errorMap = new HashMap<>();
-			
-			for(FieldError error:bindingResult.getFieldErrors()) {
-				errorMap.put(error.getField(), error.getDefaultMessage());
-				System.out.println("======================");
-				System.out.println(error.getDefaultMessage());
-				System.out.println("======================");
-			}
-			throw new CustomValidationException("유효성검사 실패함", errorMap);
-		}else {		
-			log.info(signupDto.toString());
-			// User <- SignupDto 
-			User user = signupDto.toEntity();
-			//log.info(user.toString());
-			User userEnUser = authService.joinMember(user); // 회원가입
-			System.out.println(userEnUser);
-			return "auth/signin"; // 로그인
-		}
+		// 로그를 남기는 후처리!!! 
+		return "auth/signin"; // 로그인
+	
 	}
 }
