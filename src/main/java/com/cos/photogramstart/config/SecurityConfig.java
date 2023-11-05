@@ -11,7 +11,7 @@ import com.cos.photogramstart.config.oauth.OAuth2DetailsService;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-@Configuration
+@Configuration // IoC
 public class SecurityConfig {
 	
 	private final OAuth2DetailsService oAuth2DetailsService;
